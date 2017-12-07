@@ -4,8 +4,9 @@ import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 export default class pcHeader extends React.Component{
-  state = {
-    current: 'mail',
+  constructor(props){
+    super(props);
+    
   }
   render(){
     return(
