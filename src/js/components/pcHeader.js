@@ -13,7 +13,7 @@ export default class pcHeader extends React.Component{
         <Row>
           <Col span={2}></Col>
           <Col span={4}>
-              <img src='/src/images/logo.png' />
+              <img src='/src/images/logo.png'/>
               <span>头部</span>
           </Col>
           <Col span={2}></Col>
