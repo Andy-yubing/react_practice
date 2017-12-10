@@ -1,8 +1,29 @@
 import  React from 'react';
 import { Row, Col } from 'antd';
 import { Menu, Icon } from 'antd';
+import styled from 'styled-components';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+const Wrapper = styled.section`
+margin: 0 auto;
+width: 300px;
+text-align: center;
+`;
+const Button = styled.button`
+width: 100px;
+color: white;
+background: skyblue;
+`;
+const ImgTop = styled.img`
+    width: 30px;
+    margin-right: 10px;
+`;
+const Atop = styled.a`
+  margin-top: 10px;
+  >span{
+    font-size: 16px;
+  }
+`;
 export default class pcHeader extends React.Component{
   constructor(props){
     super(props);
@@ -21,12 +42,16 @@ export default class pcHeader extends React.Component{
     return(
       <header>
         <Row>
-          <Col span={2}></Col>
+          <Col span={2}>
+            {/* <Wrapper>
+              <Button>Hello World</Button>
+            </Wrapper> */}
+          </Col>
           <Col span={4}>
-              <a href="/">
-                <img src='/src/images/logo.png' alt="logo" style={{ width: "30px" }}/>
+              <Atop href="/">
+                <ImgTop src='/src/images/logo.png' alt="logo" />
                 <span>头部</span>
-              </a>
+              </Atop>
           </Col>
           <Col span={16}>
             <Menu
