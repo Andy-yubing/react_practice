@@ -19,6 +19,7 @@ const ImgTop = styled.img`
     margin-right: 10px;
 `;
 const Atop = styled.a`
+  display: block;
   margin-top: 10px;
   >span{
     font-size: 16px;
