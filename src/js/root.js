@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {Router,Route,hashHistory} from 'react-router';
-import styled from 'styled-components';
+import styled,{injectGlobal} from 'styled-components';
 import PCIndex from './components/pcIndex';
 import MobileIndex from './components/mobile_index'
 import MediaQuery from 'react-responsive';
-
+injectGlobal`
+  .fr{
+    float: right !important;
+  }
+`
 export default class Root extends React.Component{
    render(){
      return(

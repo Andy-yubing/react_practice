@@ -1,18 +1,14 @@
 import  React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col,Button } from 'antd';
 import { Menu, Icon } from 'antd';
 import styled from 'styled-components';
+import PasswordInput from './styleComponent/PasswordInput';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const Wrapper = styled.section`
 margin: 0 auto;
 width: 300px;
 text-align: center;
-`;
-const Button = styled.button`
-width: 100px;
-color: white;
-background: skyblue;
 `;
 const ImgTop = styled.img`
     width: 30px;
@@ -25,11 +21,13 @@ const Atop = styled.a`
     font-size: 16px;
   }
 `;
+
 export default class pcHeader extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       current: 'mail',
+      hasLogined : false,
     }
   }
   handleClick(e){
@@ -38,20 +36,26 @@ export default class pcHeader extends React.Component{
       current: e.key,
     });
   }
+
   render(){
     console.log(this);
+    const userShow = this.state.hasLogined ? <Menu.Item key="logout" className="fr">
+        <Button type="primary">Primary</Button>
+        <Button type="dashed">Dashed</Button>
+        <Button>Default</Button>
+    </Menu.Item> : <Menu.Item key="logout" className="fr">
+        <Icon type="appstore"/>注册/登录
+    </Menu.Item>;
+
     return(
       <header>
         <Row>
           <Col span={2}>
-            {/* <Wrapper>
-              <Button>Hello World</Button>
-            </Wrapper> */}
           </Col>
           <Col span={4}>
               <Atop href="/">
                 <ImgTop src='/src/images/logo.png' alt="logo" />
-                <span>头部</span>
+                <span>ReactNews</span>
               </Atop>
           </Col>
           <Col span={16}>
@@ -83,6 +87,8 @@ export default class pcHeader extends React.Component{
   							<Menu.Item key="shishang">
   								<Icon type="appstore"/>时尚
   							</Menu.Item>
+                <PasswordInput name="password" size="0.2em"/>
+                {userShow}
             </Menu>
           </Col>
           <Col span={2}></Col>
