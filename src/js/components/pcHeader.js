@@ -9,7 +9,8 @@ import {
   Tabs,
   Form,
   Input,
-  Radio
+  Radio,
+  Checkbox
 } from 'antd';
 import styled from 'styled-components';
 import PasswordInput from './styleComponent/PasswordInput';
@@ -43,7 +44,7 @@ export default class pcHeader extends React.Component {
       hasLogined: false,
       visible: false,
       loading: false,
-      formLayout: 'horizontal',
+      formLayout: 'vertical'
     }
   };
 
@@ -73,15 +74,28 @@ export default class pcHeader extends React.Component {
   changeLogin(key) {
     console.log(key);
   };
-
-  //当前输入的值
-  handleFormLayoutChange(e){
-    this.setState({ formLayout: e.target.value });
-  };
+  check(){
+    console.log(this.props.form);
+    this.props.form.validateFields(
+      (err) => {
+        if (!err) {
+          console.info('success');
+        }
+      },
+    );
+  }
+  handleChange(e){
+    this.setState({
+      checkNick: e.target.checked,
+    }, () => {
+      this.props.form.validateFields(['nickname'], { force: true });
+    });
+  }
 
   render() {
-    console.log(this);
-    console.log(this.state.visible);
+    /*console.log(this);
+    console.log(this.state.visible);*/
+    const myHorizontalLoginForm = Form.create()(pcHeader);
     const userShow = this.state.hasLogined
       ? <Menu.Item key="logout" className="fr">
           <Button type="primary">Primary</Button>
@@ -92,9 +106,10 @@ export default class pcHeader extends React.Component {
         <Icon type="appstore"/>注册/登录
       </Menu.Item>;
 
-    const { formLayout } = this.state;
-    
-
+    const formLayout = this.state.formLayout;
+    console.log(this.props);
+     const { getFieldDecorator } = this.props.form;
+     console.log({ getFieldDecorator });
     return (<header>
       <Row>
         <Col span={2}></Col>
@@ -136,7 +151,6 @@ export default class pcHeader extends React.Component {
             {/* <PasswordInput name="password" size="0.2em"/> */}
             {userShow}
           </Menu>
-
           <Modal visible={this.state.visible} title="用户中心" onOk={this.handleOk} onCancel={this.handleCancel.bind(this)} footer={[
               <Button key="back" onClick={this.handleCancel.bind(this)}>Return</Button>,
               <Button key="submit" type="primary" loading={this.state.loading} onClick={this.handleOk.bind(this)}>
@@ -146,14 +160,21 @@ export default class pcHeader extends React.Component {
             <Tabs onChange={this.changeLogin.bind(this)} type="card">
               <TabPane tab="登录" key="1">
                 <Form layout={formLayout}>
-                  <FormItem label="Field A" {...formItemLayout}>
-                    <Input placeholder="input placeholder"/>
+                  <FormItem label="用户名" validateStatus="validating" help="The information is being validated...">
+                    {getFieldDecorator('username', {
+                        rules: [{
+                          required: true,
+                          message: 'Please input your name',
+                        }],
+                      })(
+                        <Input placeholder="Please input your name" />
+                      )}
                   </FormItem>
-                  <FormItem label="Field B" {...formItemLayout}>
-                    <Input placeholder="input placeholder"/>
+                  <FormItem label="密码">
+                    <Input placeholder="请输入密码"/>
                   </FormItem>
-                  <FormItem {...buttonItemLayout}>
-                    <Button type="primary">Submit</Button>
+                  <FormItem >
+                    <Button type="primary">登录</Button>
                   </FormItem>
                 </Form>
               </TabPane>
@@ -165,12 +186,10 @@ export default class pcHeader extends React.Component {
         </Col>
         <Col span={2}></Col>
       </Row>
-      {/* <Link>Unstyled, boring Link</Link><br/>
-        <StyledLink>Styled, exciting Link</StyledLink> */
-      }
+      {/* <Link>Unstyled, boring Link</Link><bgetFieldDecoratorr/>
+        <StyledLink>Styled, exciting Link</StyledLink> */}
+
     </header>)
   }
-
   renderContact() {}
-
 }
