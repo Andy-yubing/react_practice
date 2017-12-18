@@ -59,6 +59,7 @@ class pcHeader extends React.Component {
 
   handleCancel(e) {
     console.log(e);
+     this.props.form.resetFields();
     this.setState({visible: false});
   };
 
