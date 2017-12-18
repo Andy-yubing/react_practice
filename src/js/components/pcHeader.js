@@ -93,8 +93,9 @@ export default class pcHeader extends React.Component {
       </Menu.Item>;
 
     const { formLayout } = this.state;
-    
 
+    console.log({ formLayout });
+    const formItemLayout = {wrapperCol:{ offset: 10  }}
     return (<header>
       <Row>
         <Col span={2}></Col>
@@ -146,14 +147,14 @@ export default class pcHeader extends React.Component {
             <Tabs onChange={this.changeLogin.bind(this)} type="card">
               <TabPane tab="登录" key="1">
                 <Form layout={formLayout}>
-                  <FormItem label="Field A" {...formItemLayout}>
-                    <Input placeholder="input placeholder"/>
+                  <FormItem label="账号" label="Fail" validateStatus="error" help="Should be combination of numbers & alphabets">
+                    <Input placeholder="请输入账号"/>
                   </FormItem>
-                  <FormItem label="Field B" {...formItemLayout}>
-                    <Input placeholder="input placeholder"/>
+                  <FormItem label="密码">
+                    <Input placeholder="请输入密码"/>
                   </FormItem>
-                  <FormItem {...buttonItemLayout}>
-                    <Button type="primary">Submit</Button>
+                  <FormItem wrapperCol= {{ offset: 10  }}>
+                    <Button type="primary">登录</Button>
                   </FormItem>
                 </Form>
               </TabPane>

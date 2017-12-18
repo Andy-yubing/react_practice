@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import "../../lib/rem";
-const MobileHeader = styled.header`
+const MobileHeader = styled.header `
   border-bottom: 1px solid #2db7f5;
   padding-left: 10px;
   background-color: #f6f6f6;
@@ -16,18 +16,16 @@ const MobileHeader = styled.header`
     color: #2db7f5;
   }
 `;
-export default class mobileHeader extends React.Component{
-  constructor(){
+export default class mobileHeader extends React.Component {
+  constructor() {
     super()
   }
-  render(){
-    return (
-      <div>
-        <MobileHeader>
-           <img src="./src/images/logo.png" alt="logo"/>
-           <span>ReactNews</span>
-         </MobileHeader>
-      </div>
-    )
+  render() {
+    return (<div>
+      <MobileHeader>
+        <img src="./src/images/logo.png" alt="logo"/>
+        <span>ReactNews</span>
+      </MobileHeader>
+    </div>)
   }
 }
