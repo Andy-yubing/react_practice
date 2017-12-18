@@ -35,8 +35,8 @@ const Atop = styled.a `
     font-size: 16px;
   }
 `;
-
-export default class pcHeader extends React.Component {
+//const WrappedDynamicRule = Form.create()(pcHeader);
+class pcHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,7 +75,6 @@ export default class pcHeader extends React.Component {
     console.log(key);
   };
   check(){
-    console.log(this.props.form);
     this.props.form.validateFields(
       (err) => {
         if (!err) {
@@ -160,7 +159,7 @@ export default class pcHeader extends React.Component {
             <Tabs onChange={this.changeLogin.bind(this)} type="card">
               <TabPane tab="登录" key="1">
                 <Form layout={formLayout}>
-                  <FormItem label="用户名" validateStatus="validating" help="The information is being validated...">
+                  <FormItem label="用户名" >
                     {getFieldDecorator('username', {
                         rules: [{
                           required: true,
@@ -174,7 +173,7 @@ export default class pcHeader extends React.Component {
                     <Input placeholder="请输入密码"/>
                   </FormItem>
                   <FormItem >
-                    <Button type="primary">登录</Button>
+                    <Button type="primary" onClick={this.check.bind(this)}>登录</Button>
                   </FormItem>
                 </Form>
               </TabPane>
@@ -193,3 +192,6 @@ export default class pcHeader extends React.Component {
   }
   renderContact() {}
 }
+
+const ContatoForm = Form.create({})(pcHeader);
+export default ContatoForm;
