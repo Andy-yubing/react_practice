@@ -61,7 +61,6 @@ class pcHeader extends React.Component {
   //  console.log(e);
     this.props.form.resetFields();
     this.setState({visible: false});
-    console.log(this.props.form.getFieldsValue());
   };
 
   handleClick(e) {
@@ -80,18 +79,18 @@ class pcHeader extends React.Component {
     this.props.form.validateFields((err,values) => {
       if (!err) {
         console.info('success');
-        console.log(values);
+        //console.log(values);
       }
     });
+    console.log(this.props.form.getFieldsValue());
   }
   handleChange(e) {
+    console.log(e.target.checked);
     this.setState({
       checkNick: e.target.checked
     }, () => {
-      this.props.form.validateFields(['nickname'], {force: true});
-      console.log(this.props.form.getFieldValue());
+      this.props.form.validateFields(['username'], {force: true});
     });
-
   }
 
   render() {
@@ -107,11 +106,10 @@ class pcHeader extends React.Component {
       : <Menu.Item key="logoIn" className="fr">
         <Icon type="appstore"/>注册/登录
       </Menu.Item>;
-
     const formLayout = this.state.formLayout;
     //console.log(this.props);
     const {getFieldDecorator} = this.props.form;
-  //  console.log({getFieldDecorator});
+   //console.log({getFieldDecorator});
     return (<header>
       <Row>
         <Col span={2}></Col>
@@ -162,7 +160,7 @@ class pcHeader extends React.Component {
             <Tabs onChange={this.changeLogin.bind(this)} type="card">
               <TabPane tab="登录" key="1">
                 <Form layout={formLayout}>
-                  <FormItem label="用户名">
+                  <FormItem label="用户名" >
                     {
                       getFieldDecorator('username', {
                         rules: [
@@ -213,4 +211,6 @@ class pcHeader extends React.Component {
 }
 
 const ContatoForm = Form.create({})(pcHeader);
+
+
 export default ContatoForm;
