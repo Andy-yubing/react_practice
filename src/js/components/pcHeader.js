@@ -53,18 +53,19 @@ class pcHeader extends React.Component {
   };
 
   handleOk(e) {
-    console.log(e);
+    //console.log(e);
     this.setState({visible: false});
   };
 
   handleCancel(e) {
-    console.log(e);
-     this.props.form.resetFields();
+  //  console.log(e);
+    this.props.form.resetFields();
     this.setState({visible: false});
+    console.log(this.props.form.getFieldsValue());
   };
 
   handleClick(e) {
-    console.log('click ', e);
+  //  console.log('click ', e);
     this.setState({current: e.key});
     if (e.key == "logoIn") {
       this.showModal();
@@ -75,21 +76,22 @@ class pcHeader extends React.Component {
   changeLogin(key) {
     console.log(key);
   };
-  check(){
-    this.props.form.validateFields(
-      (err) => {
-        if (!err) {
-          console.info('success');
-        }
-      },
-    );
-  }
-  handleChange(e){
-    this.setState({
-      checkNick: e.target.checked,
-    }, () => {
-      this.props.form.validateFields(['nickname'], { force: true });
+  check() {
+    this.props.form.validateFields((err,values) => {
+      if (!err) {
+        console.info('success');
+        console.log(values);
+      }
     });
+  }
+  handleChange(e) {
+    this.setState({
+      checkNick: e.target.checked
+    }, () => {
+      this.props.form.validateFields(['nickname'], {force: true});
+      console.log(this.props.form.getFieldValue());
+    });
+
   }
 
   render() {
@@ -107,9 +109,9 @@ class pcHeader extends React.Component {
       </Menu.Item>;
 
     const formLayout = this.state.formLayout;
-    console.log(this.props);
-     const { getFieldDecorator } = this.props.form;
-     console.log({ getFieldDecorator });
+    //console.log(this.props);
+    const {getFieldDecorator} = this.props.form;
+  //  console.log({getFieldDecorator});
     return (<header>
       <Row>
         <Col span={2}></Col>
@@ -160,18 +162,33 @@ class pcHeader extends React.Component {
             <Tabs onChange={this.changeLogin.bind(this)} type="card">
               <TabPane tab="登录" key="1">
                 <Form layout={formLayout}>
-                  <FormItem label="用户名" >
-                    {getFieldDecorator('username', {
-                        rules: [{
-                          required: true,
-                          message: 'Please input your name',
-                        }],
-                      })(
-                        <Input placeholder="Please input your name" />
-                      )}
+                  <FormItem label="用户名">
+                    {
+                      getFieldDecorator('username', {
+                        rules: [
+                          {
+                            required: true,
+                            min:4,
+                            message: 'Please input your name'
+                          },
+                        ],
+                        /*getValueFromEvent(data){
+                          console.log(data);
+                        },*/
+                      })(<Input placeholder="Please input your name"/>)
+                    }
                   </FormItem>
                   <FormItem label="密码">
-                    <Input placeholder="请输入密码"/>
+                    {
+                      getFieldDecorator('password', {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input password'
+                          }
+                        ]
+                      })(<Input placeholder="Please input password"/>)
+                    }
                   </FormItem>
                   <FormItem >
                     <Button type="primary" onClick={this.check.bind(this)}>登录</Button>
@@ -187,7 +204,8 @@ class pcHeader extends React.Component {
         <Col span={2}></Col>
       </Row>
       {/* <Link>Unstyled, boring Link</Link><bgetFieldDecoratorr/>
-        <StyledLink>Styled, exciting Link</StyledLink> */}
+        <StyledLink>Styled, exciting Link</StyledLink> */
+      }
 
     </header>)
   }
