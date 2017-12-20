@@ -55,13 +55,18 @@ class pcHeader extends React.Component {
   handleOk(e) {
     //console.log(e);
     this.setState({visible: false});
+    /*this.props.form.validateFields((err,values) => {
+      if (!err) {
+        console.info('success');
+        console.log(values);
+      }
+    });*/
   };
 
   handleCancel(e) {
   //  console.log(e);
-    this.props.form.resetFields();
     this.setState({visible: false});
-    console.log(this.props.form.getFieldsValue());
+    this.props.form.resetFields();
   };
 
   handleClick(e) {
@@ -76,23 +81,25 @@ class pcHeader extends React.Component {
   changeLogin(key) {
     console.log(key);
   };
-  check() {
-    this.props.form.validateFields((err,values) => {
+  login() {
+    this.props.form.validateFields(['username','password'],(err,values) => {
       if (!err) {
         console.info('success');
         console.log(values);
+        this.setState({visible: false});
       }
     });
+    console.log(this.props.form.getFieldsValue(['username','password']));
   }
-  handleChange(e) {
-    this.setState({
-      checkNick: e.target.checked
-    }, () => {
-      this.props.form.validateFields(['nickname'], {force: true});
-      console.log(this.props.form.getFieldValue());
-    });
-
-  }
+register(){
+  this.props.form.validateFields(['account','registerPassword','sureRegisterPassword'],(err,values) => {
+    if (!err) {
+      console.info('success');
+      console.log(values);
+      this.setState({visible: false});
+    }
+  });
+}
 
   render() {
     /*console.log(this);
@@ -154,10 +161,10 @@ class pcHeader extends React.Component {
             {userShow}
           </Menu>
           <Modal visible={this.state.visible} title="用户中心" onOk={this.handleOk} onCancel={this.handleCancel.bind(this)} footer={[
-              <Button key="back" onClick={this.handleCancel.bind(this)}>Return</Button>,
+              /*<Button key="back" onClick={this.handleCancel.bind(this)}>返回</Button>,
               <Button key="submit" type="primary" loading={this.state.loading} onClick={this.handleOk.bind(this)}>
-                Submit
-              </Button>
+                登录
+              </Button>*/
             ]}>
             <Tabs onChange={this.changeLogin.bind(this)} type="card">
               <TabPane tab="登录" key="1">
@@ -169,12 +176,9 @@ class pcHeader extends React.Component {
                           {
                             required: true,
                             min:4,
-                            message: 'Please input your name'
+                            message: '必填且最小是四个字符'
                           },
                         ],
-                        /*getValueFromEvent(data){
-                          console.log(data);
-                        },*/
                       })(<Input placeholder="Please input your name"/>)
                     }
                   </FormItem>
@@ -184,19 +188,62 @@ class pcHeader extends React.Component {
                         rules: [
                           {
                             required: true,
-                            message: 'Please input password'
+                            message: '密码必填且最小是四个字符'
                           }
                         ]
                       })(<Input placeholder="Please input password"/>)
                     }
                   </FormItem>
-                  <FormItem >
-                    <Button type="primary" onClick={this.check.bind(this)}>登录</Button>
+                  <FormItem>
+                    <Button type="primary" htmlType="submit" onClick={this.login.bind(this)}>登录</Button>
                   </FormItem>
                 </Form>
               </TabPane>
               <TabPane tab="注册" key="2">
-                <p>注册</p>
+                  <Form layout={formLayout}>
+                    <FormItem label="注册">
+                      {
+                        getFieldDecorator('account', {
+                          rules: [
+                            {
+                              required: true,
+                              min:4,
+                              message: '必填且最小是四个字符'
+                            },
+                          ],
+                        })(<Input placeholder="请输入你的账号"/>)
+                      }
+                    </FormItem>
+                    <FormItem label="密码">
+                      {
+                        getFieldDecorator('registerPassword', {
+                          rules: [
+                            {
+                              required: true,
+                              min:4,
+                              message: '必填且最小是四个字符'
+                            },
+                          ],
+                        })(<Input placeholder="请输入你的密码"/>)
+                      }
+                    </FormItem>
+                    <FormItem label="确认密码">
+                      {
+                        getFieldDecorator('sureRegisterPassword', {
+                          rules: [
+                            {
+                              required: true,
+                              min:4,
+                              message: '必填且最小是四个字符'
+                            },
+                          ],
+                        })(<Input placeholder="请再次输入你的密码"/>)
+                      }
+                    </FormItem>
+                    <FormItem>
+                      <Button type="primary" onClick={this.register.bind(this)}>注册</Button>
+                    </FormItem>
+                  </Form>
               </TabPane>
             </Tabs>
           </Modal>
