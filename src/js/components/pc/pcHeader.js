@@ -13,8 +13,8 @@ import {
   Checkbox
 } from 'antd';
 import styled from 'styled-components';
-import PasswordInput from './styleComponent/PasswordInput';
-import {Link, StyledLink} from './styleComponent/aLink'
+import PasswordInput from '../styleComponent/PasswordInput';
+import {Link, StyledLink} from '../styleComponent/aLink'
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const TabPane = Tabs.TabPane;
@@ -44,6 +44,7 @@ class pcHeader extends React.Component {
       hasLogined: false,
       visible: false,
       loading: false,
+      action: 'login',
       formLayout: 'vertical'
     }
   };
@@ -76,11 +77,17 @@ class pcHeader extends React.Component {
     console.log(key);
   };
   login() {
+    const fetchOption = {method: 'GET'};
     this.props.form.validateFields(['username','password'],(err,values) => {
       if (!err) {
         console.info('success');
         this.setState({visible: false});
         console.log(values);
+        console.log(fetch);
+        fetch("http://newsapi.gugujiankong.com/Handler.ashx?action="+ this.state.action
+  			+ "&username=" + values.userName + "&password=" + values.password, fetchOption).then(response => response.json()).then(json=>{
+          console.log(json);
+        })
       }
     });
     console.log(this.props.form.getFieldsValue(['username','password']));

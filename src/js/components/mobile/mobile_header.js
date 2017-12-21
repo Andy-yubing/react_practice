@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import "../../lib/rem";
+import "../../../lib/rem";
 const MobileHeader = styled.header `
   border-bottom: 1px solid #2db7f5;
   padding-left: 10px;

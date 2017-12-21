@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {Router,Route,hashHistory} from 'react-router';
 import styled,{injectGlobal} from 'styled-components';
-import PCIndex from './components/pcIndex';
-import MobileIndex from './components/mobile_index'
+import PCIndex from './components/pc/pcIndex';
+import MobileIndex from './components/mobile/mobile_index'
 import MediaQuery from 'react-responsive';
 injectGlobal`
   .fr{
