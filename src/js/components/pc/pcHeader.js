@@ -162,94 +162,94 @@ class pcHeader extends React.Component {
             {/* <PasswordInput name="password" size="0.2em"/> */}
             {userShow}
           </Menu>
-          <Modal visible={this.state.visible} title="用户中心" onOk={this.handleOk} onCancel={this.handleCancel.bind(this)} footer={[
-              /*<Button key="back" onClick={this.handleCancel.bind(this)}>Return</Button>,
-              <Button key="submit" type="primary" loading={this.state.loading} onClick={this.handleOk.bind(this)}>
-                Submit
-              </Button>*/
-            ]}>
-            <Tabs onChange={this.changeLogin.bind(this)} type="card">
-              <TabPane tab="登录" key="1">
-                <Form layout={formLayout}>
-                  <FormItem label="用户名" >
-                    {
-                      getFieldDecorator('username', {
-                        rules: [
-                          {
-                            required: true,
-                            min:4,
-                            message: '必填不少于4个字符'
-                          },
-                        ],
-                      })(<Input placeholder="Please input your name"/>)
-                    }
-                  </FormItem>
-                  <FormItem label="密码">
-                    {
-                      getFieldDecorator('password', {
-                        rules: [
-                          {
-                            required: true,
-                            message: '密码不能为空'
-                          }
-                        ]
-                      })(<Input placeholder="Please input password"/>)
-                    }
-                  </FormItem>
-                  <FormItem >
-                    <Button type="primary" onClick={this.login.bind(this)}>登录</Button>
-                  </FormItem>
-                </Form>
-              </TabPane>
-              <TabPane tab="注册" key="2">
-                <Form layout={formLayout} onSubmit={this.register.bind(this)}>
-                  <FormItem label="注册" >
-                    {
-                      getFieldDecorator('register', {
-                        rules: [
-                          {
-                            required: true,
-                            min:4,
-                            message: '必填不少于4个字符'
-                          },
-                        ],
-                      })(<Input placeholder="请输入你的用户名"/>)
-                    }
-                  </FormItem>
-                  <FormItem label="密码">
-                    {
-                      getFieldDecorator('registerPassword', {
-                        rules: [
-                          {
-                            required: true,
-                            message: '密码不能为空'
-                          }
-                        ]
-                      })(<Input placeholder="请输入你的密码"/>)
-                    }
-                  </FormItem>
-                  <FormItem label="密码">
-                    {
-                      getFieldDecorator('sureRegisterPassword', {
-                        rules: [
-                          {
-                            required: true,
-                            message: '密码不能为空'
-                          }
-                        ]
-                      })(<Input placeholder="请再次输入你的密码"/>)
-                    }
-                  </FormItem>
-                  <FormItem >
-                    <Button type="primary" htmlType="submit">注册</Button>
-                  </FormItem>
-                </Form>
-              </TabPane>
-            </Tabs>
-          </Modal>
         </Col>
         <Col span={2}></Col>
       </Row>
+      <Modal visible={this.state.visible} title="用户中心" onOk={this.handleOk} onCancel={this.handleCancel.bind(this)} footer={[
+        <Button key="back" onClick={this.handleCancel.bind(this)}>Return</Button>,
+          <Button key="submit" type="primary" loading={this.state.loading} onClick={this.handleOk.bind(this)}>
+            Submit
+          </Button>
+        ]}>
+        <Tabs onChange={this.changeLogin.bind(this)} type="card">
+          <TabPane tab="登录" key="1">
+            <Form layout={formLayout}>
+              <FormItem label="用户名" >
+                {
+                  getFieldDecorator('username', {
+                    rules: [
+                      {
+                        required: true,
+                        min:4,
+                        message: '必填不少于4个字符'
+                      },
+                    ],
+                  })(<Input placeholder="Please input your name"/>)
+                }
+              </FormItem>
+              <FormItem label="密码">
+                {
+                  getFieldDecorator('password', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '密码不能为空'
+                      }
+                    ]
+                  })(<Input placeholder="Please input password"/>)
+                }
+              </FormItem>
+              <FormItem >
+                <Button type="primary" onClick={this.login.bind(this)}>登录</Button>
+              </FormItem>
+            </Form>
+          </TabPane>
+          <TabPane tab="注册" key="2">
+            <Form layout={formLayout} onSubmit={this.register.bind(this)}>
+              <FormItem label="注册" >
+                {
+                  getFieldDecorator('register', {
+                    rules: [
+                      {
+                        required: true,
+                        min:4,
+                        message: '必填不少于4个字符'
+                      },
+                    ],
+                  })(<Input placeholder="请输入你的用户名"/>)
+                }
+              </FormItem>
+              <FormItem label="密码">
+                {
+                  getFieldDecorator('registerPassword', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '密码不能为空'
+                      }
+                    ]
+                  })(<Input placeholder="请输入你的密码"/>)
+                }
+              </FormItem>
+              <FormItem label="密码">
+                {
+                  getFieldDecorator('sureRegisterPassword', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '密码不能为空'
+                      }
+                    ]
+                  })(<Input placeholder="请再次输入你的密码"/>)
+                }
+              </FormItem>
+              <FormItem >
+                <Button type="primary" htmlType="submit">注册</Button>
+              </FormItem>
+            </Form>
+          </TabPane>
+        </Tabs>
+      </Modal>
       {/* <Link>Unstyled, boring Link</Link><bgetFieldDecoratorr/>
         <StyledLink>Styled, exciting Link</StyledLink> */
       }
